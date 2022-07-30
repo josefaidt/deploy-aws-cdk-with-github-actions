@@ -41,10 +41,10 @@ export class GitHubActions extends Construct {
 
     /**
      * Create a deployment role that has short lived credentials. The only
-     * principal that can assume this role is the GitHub Open ID provider.
+     * principal that can assume this role is the GitHub OpenID provider.
      *
      * This role is granted authority to assume aws cdk roles; which are created
-     * by the aws cdk v2.
+     * by AWS CDK v2
      */
     const role = new iam.Role(this, 'GitHubActionsRole', {
       assumedBy: principal,
