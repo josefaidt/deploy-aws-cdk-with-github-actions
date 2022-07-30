@@ -1,0 +1,33 @@
+name: release
+on:
+  push:
+    branches:
+      - main
+env:
+  AWS_REGION: us-east-1
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    # permissions for AWS Action to interact with GitHub's OIDC endpoint
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          role-session-name: ${{ secrets.AWS_ROLE_SESSION_NAME }}
+          aws-region: ${{ env.AWS_REGION }}
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@v2.2.2
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - name: cdk synth
+        run: pnpm cdk synth
+      - name: cdk deploy
+        run: pnpm cdk deploy
