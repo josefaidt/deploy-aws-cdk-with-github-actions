@@ -34,3 +34,8 @@ Using temporary AWS credentials to deploy CDK apps with GitHub Actions.
 - create an action to add additional repositories to the trust policy (demo currently creates the trust policy enabling _all_ repositories within `josefaidt`, however we can specify individual repositories)
 - with `vite-node`, we can add a dotenv file for [public environment variables](https://vitejs.dev/config/#environment-variables) (add `vite` for `import.meta` types)
 - with `vite-node`, we can also expand to add tests with [`vitest`](https://vitest.dev/)
+
+## Resources
+
+- https://dev.to/simonireilly/secure-aws-cdk-deployments-with-github-actions-3jfk
+- https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
